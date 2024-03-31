@@ -10,11 +10,12 @@ const cards = new Schema(
       enum: ["Data Quality and Coverage", "Engagement", "Intent", "Potential Opportunity", "Deal", "Customer"],
     },
     description: { type: String },
+    images: { type: Object },
     cardType: { type: String, enum: ["default", "special", "user"] },
     displayorder: { type: Number },
     hidden: { type: Boolean },
   },
-  { strict: true, timestamps: true, versionKey: false }
+  { strict: false, timestamps: true, versionKey: false }
 );
 
 cards.index({ userId: 1 });

@@ -17,7 +17,7 @@ const validateCard = (cardBody) => {
     } else {
       throw new Error("Title not provided.");
     }
-    if (validatedCardBody.description) {
+    /* if (validatedCardBody.description) {
       const validateddescription = removeTags(validatedCardBody.description);
       if (validateddescription) {
         validatedCardBody.description = validateddescription;
@@ -26,15 +26,16 @@ const validateCard = (cardBody) => {
       }
     } else {
       throw new Error("description not provided.");
-    }
+    } */
     if (!validatedCardBody.cardUuid) {
       validatedCardBody.cardUuid = uuidv5(`${validatedCardBody.userId}${validatedCardBody.title}`, process.env.UUID_NAMESPACE);
     }
+    validatedCardBody.status = true;
 
     return validatedCardBody;
   } catch (e) {
     console.error(chalk.red("Error occured in validateCard core", e));
-    return false;
+    return {status: false, error: e};
   }
 };
 
