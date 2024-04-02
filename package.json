@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "devStart": "nodemon index.js",
+    "start": "node index.js",
     "debug": "nodemon --inspect index.js"
   },
   "author": "",
