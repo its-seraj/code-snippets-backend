@@ -11,12 +11,12 @@ const validateCard = (cardBody) => {
       const validatedTitle = removeTags(validatedCardBody.title);
       if (validatedTitle) {
         validatedCardBody.title = validatedTitle;
-      } else {
+      } /* else {
         throw new Error("Title not provided.");
-      }
-    } else {
+      } */
+    } /* else {
       throw new Error("Title not provided.");
-    }
+    } */
     /* if (validatedCardBody.description) {
       const validateddescription = removeTags(validatedCardBody.description);
       if (validateddescription) {
