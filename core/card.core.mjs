@@ -35,7 +35,7 @@ const validateCard = (cardBody) => {
     return validatedCardBody;
   } catch (e) {
     console.error(chalk.red("Error occured in validateCard core", e));
-    return {status: false, error: e};
+    return { status: false, error: e };
   }
 };
 
@@ -60,14 +60,25 @@ const saveOrUpdateCard = async (cardBody) => {
 };
 
 const getCards = async (userId) => {
-  try{
-    const cards = await cardModel.find({userId}).sort({displayorder: 1});
+  try {
+    const cards = await cardModel.find({ userId }).sort({ displayorder: 1 });
 
     return cards;
-  }catch(e){
+  } catch (e) {
     console.error(chalk.red("Error occured error in getCards core"), e);
     return false;
   }
-}
+};
 
-export { validateCard, saveOrUpdateCard, getCards };
+const deleteCardCore = async (userId, cardUuid) => {
+  try {
+    const cards = await cardModel.deleteOne({ userId, cardUuid });
+
+    return cards;
+  } catch (e) {
+    console.error(chalk.red("Error occured error in deleteCard core"), e);
+    return false;
+  }
+};
+
+export { validateCard, saveOrUpdateCard, getCards, deleteCardCore };

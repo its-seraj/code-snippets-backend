@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { validateCard, saveOrUpdateCard, getCards } from "../core/card.core.mjs";
+import { validateCard, saveOrUpdateCard, getCards, deleteCardCore } from "../core/card.core.mjs";
 import { uploadImage } from "../service/imgbb.mjs";
 
 const newCard = async (req, res) => {
@@ -48,4 +48,17 @@ const getCard = async (req, res) => {
   }
 };
 
-export { newCard, getCard };
+const deleteCard = async(req, res) => {
+  try {
+    const { userId, cardUuid } = req.query;
+
+    const cardsData = await deleteCardCore(userId, cardUuid);
+
+    return res.send({ success: true, data: cardsData });
+  } catch (e) {
+    console.error(chalk.red("Error occured in deleteCard controller"), e);
+    res.status(400).send({ success: false, message: e.message });
+  }
+}
+
+export { newCard, getCard, deleteCard };

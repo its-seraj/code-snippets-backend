@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { newCard, getCard } from "../controller/card.controller.mjs";
+import { newCard, getCard, deleteCard } from "../controller/card.controller.mjs";
 
 const cardRouter = Router();
 
 cardRouter.route("/")
 .get(getCard)
-.post(newCard);
+.post(newCard)
+.delete(deleteCard)
 
 export { cardRouter };
