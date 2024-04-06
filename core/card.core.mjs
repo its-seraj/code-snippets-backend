@@ -28,7 +28,7 @@ const validateCard = (cardBody) => {
       throw new Error("description not provided.");
     } */
     if (!validatedCardBody.cardUuid) {
-      validatedCardBody.cardUuid = uuidv5(`${validatedCardBody.userId}${validatedCardBody.title}`, process.env.UUID_NAMESPACE);
+      validatedCardBody.cardUuid = uuidv5(`${validatedCardBody.userId}${validatedCardBody.title}${new Date().toISOString()}`, process.env.UUID_NAMESPACE);
     }
     validatedCardBody.status = true;
 
