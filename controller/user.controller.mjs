@@ -1,5 +1,6 @@
 import CryptoJS from "crypto-js";
 import jwt from "jsonwebtoken";
+import cookie from "cookie";
 import chalk from "chalk";
 import { formatDate } from "../helper/index.helper.mjs";
 
@@ -26,4 +27,18 @@ const login = (req, res) => {
   }
 };
 
-export { login };
+const logout = (req, res) => {
+  try {
+    const cookies = cookie.parse(req.headers.cookie || "");
+    console.log("logout - ", cookies);
+    delete cookies.codesnip;
+
+    res.clearCookie("codesnip");
+    res.send({ success: true });
+  } catch (e) {
+    console.error(chalk.red("Error occured in logout controller"), e);
+    res.status(400).send({ success: false, error: e.message });
+  }
+};
+
+export { login, logout };
