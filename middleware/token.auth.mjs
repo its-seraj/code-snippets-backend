@@ -14,7 +14,8 @@ export const authenticateToken = (req, res, next) => {
   const jwt_secret_key = process.env.UUID_NAMESPACE;
   jwt.verify(token, jwt_secret_key, (err, user) => {
     if (err) {
-      return res.status(403).json({ error: "Forbidden" });
+      console.log(err)
+      return res.status(403).json({ error: err.message });
     }
     next();
   });
