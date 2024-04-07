@@ -1,4 +1,5 @@
-import { cardRouter } from "../routes/Card.router.mjs";
+import { cardRouter } from "../routes/card.router.mjs";
+import { userRouter } from "../routes/login.router.mjs";
 
 export const routes = (app) => {  
   app.get("/", (req, res) => {
@@ -6,4 +7,5 @@ export const routes = (app) => {
   });
 
   app.use("/card", cardRouter)
+  app.use("/login", userRouter)
 };
