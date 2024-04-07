@@ -19,7 +19,7 @@ const login = (req, res) => {
     const token = jwt.sign({ resource: "admin" }, jwt_secret_key, { expiresIn: "1h" });
     console.log("token generated", date, passkey, passkeyShouldBe, jwt_secret_key, token);
 
-    res.cookie("codesnip", token, { httpOnly: true, secure: true });
+    res.cookie("codesnip", token, { httpOnly: true, secure: true, maxAge: 3600000, sameSite: None });
     res.send({ success: true, resource: "admin" });
   } catch (e) {
     console.error(chalk.red("Error occured in login controller"), e);
@@ -31,7 +31,6 @@ const logout = (req, res) => {
   try {
     const cookies = cookie.parse(req.headers.cookie || "");
     console.log("logout - ", cookies);
-    delete cookies.codesnip;
 
     res.clearCookie("codesnip");
     res.send({ success: true });
