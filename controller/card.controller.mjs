@@ -41,24 +41,24 @@ const getCard = async (req, res) => {
 
     const cardsData = await getCards(userId);
 
-    return res.send({ success: true, data: cardsData });
+    return res.send({ success: true, count: cardsData?.length, data: cardsData });
   } catch (e) {
     console.error(chalk.red("Error occured in getCard controller"), e);
     res.status(400).send({ success: false, message: e.message });
   }
 };
 
-const deleteCard = async(req, res) => {
+const deleteCard = async (req, res) => {
   try {
     const { userId, cardUuid } = req.query;
 
-    const cardsData = await deleteCardCore(userId, cardUuid);
+    const cardsData = await saveOrUpdateCard({ cardUuid, isDeleted: true });
 
     return res.send({ success: true, data: cardsData });
   } catch (e) {
     console.error(chalk.red("Error occured in deleteCard controller"), e);
     res.status(400).send({ success: false, message: e.message });
   }
-}
+};
 
 export { newCard, getCard, deleteCard };

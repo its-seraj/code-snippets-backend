@@ -61,7 +61,7 @@ const saveOrUpdateCard = async (cardBody) => {
 
 const getCards = async (userId) => {
   try {
-    const cards = await cardModel.find({ userId }).sort({ displayorder: 1 });
+    const cards = await cardModel.find({ userId, isDeleted: false }).sort({ displayorder: 1 });
 
     return cards;
   } catch (e) {

@@ -13,9 +13,10 @@ export const authenticateToken = (req, res, next) => {
   const jwt_secret_key = process.env.UUID_NAMESPACE;
   jwt.verify(token, jwt_secret_key, (err, user) => {
     if (err) {
-      console.log(err)
+      console.log(chalk.red("Token Error: ", err.message));
       return res.status(403).json({ error: err.message });
     }
+    console.log("token", chalk.green(token), "👌 valid");
     next();
   });
 };

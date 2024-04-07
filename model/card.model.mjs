@@ -13,7 +13,7 @@ const cards = new Schema(
     images: { type: Object },
     cardType: { type: String, enum: ["default", "special", "user"] },
     displayorder: { type: Number },
-    hidden: { type: Boolean },
+    isDeleted: { type: Boolean, default: false },
   },
   { strict: false, timestamps: true, versionKey: false }
 );
