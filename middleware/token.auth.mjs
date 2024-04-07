@@ -4,6 +4,8 @@ import chalk from "chalk";
 
 export const authenticateToken = (req, res, next) => {
   const cookies = cookie.parse(req.headers.cookie || "");
+  console.log("header", cookies ?? req.headers)
+  console.log("cookie", req.cookies)
   if (!cookies?.codesnip) {
     console.log(chalk.red("Error: cookie not found"));
     return res.status(401).send({ success: false, error: "Unauthorized" });
