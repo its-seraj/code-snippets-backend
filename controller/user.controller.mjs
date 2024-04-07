@@ -14,6 +14,7 @@ const login = (req, res) => {
     const token = jwt.sign({}, jwt_secret_key, { expiresIn: "1h" });
     console.log("token generated", date, passkey, passkeyShouldBe, jwt_secret_key, token);
 
+    res.cookie('codesnip', token, { httpOnly: true });
     res.send({ success: true, token: token });
   } catch (e) {
     console.error(chalk.red("Error occured in login controller"), e);
