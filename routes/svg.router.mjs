@@ -1,6 +1,6 @@
 import { Router } from "express";
 import multer from "multer";
-import { newSVG, getSVG, deleteSVG, zipUpload } from "../controller/svg.controller.mjs";
+import { newSVG, getSVG, getCount, deleteSVG, zipUpload } from "../controller/svg.controller.mjs";
 
 const svgRouter = Router();
 
@@ -8,6 +8,8 @@ svgRouter.route("/")
 .get(getSVG)
 .post(newSVG)
 .delete(deleteSVG)
+
+svgRouter.get("/counts", getCount);
 
 
 const storage = multer.memoryStorage();

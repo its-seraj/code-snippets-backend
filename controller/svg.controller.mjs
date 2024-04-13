@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import { v5 as uuidv5 } from "uuid";
 import AdmZip from "adm-zip";
-import { saveOrUpdateSVG, getSVGs, deleteSVGCore } from "../core/svg.core.mjs";
+import { saveOrUpdateSVG, getSVGs, getCounts, deleteSVGCore } from "../core/svg.core.mjs";
 
 const newSVG = async (req, res) => {
   try {
@@ -32,6 +32,17 @@ const getSVG = async (req, res) => {
     return res.send({ success: true, count: svgsData?.length, data: svgsData });
   } catch (e) {
     console.error(chalk.red("Error occured in getSVG controller"), e);
+    res.status(400).send({ success: false, message: e.message });
+  }
+};
+
+const getCount = async (req, res) => {
+  try {
+    const counts = await getCounts();
+
+    return res.send({ success: true, counts: counts });
+  } catch (e) {
+    console.error(chalk.red("Error occured in getCount controller"), e);
     res.status(400).send({ success: false, message: e.message });
   }
 };
@@ -91,4 +102,4 @@ const zipUpload = async (req, res) => {
   }
 };
 
-export { newSVG, getSVG, deleteSVG, zipUpload };
+export { newSVG, getSVG, getCount, deleteSVG, zipUpload };

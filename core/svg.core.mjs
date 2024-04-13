@@ -36,6 +36,17 @@ const getSVGs = async (offset) => {
   }
 };
 
+const getCounts = async () => {
+  try {
+    const counts = await svgModel.countDocuments({ isDeleted: false });
+
+    return counts;
+  } catch (e) {
+    console.error(chalk.red("Error occured error in getCounts core"), e);
+    return false;
+  }
+};
+
 const deleteSVGCore = async (svgUuid) => {
   try {
     const cards = await svgModel.deleteOne({ svgUuid });
@@ -47,4 +58,4 @@ const deleteSVGCore = async (svgUuid) => {
   }
 };
 
-export { saveOrUpdateSVG, getSVGs, deleteSVGCore };
+export { saveOrUpdateSVG, getSVGs, getCounts, deleteSVGCore };
