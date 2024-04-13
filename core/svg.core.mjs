@@ -25,9 +25,9 @@ const saveOrUpdateSVG = async (svgBody) => {
   }
 };
 
-const getSVGs = async () => {
+const getSVGs = async (offset) => {
   try {
-    const cards = await svgModel.find({ isDeleted: false });
+    const cards = await svgModel.find({ isDeleted: false }).skip(offset).limit(200);
 
     return cards;
   } catch (e) {
