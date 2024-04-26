@@ -45,8 +45,11 @@ const getSVGs = async (offset, search) => {
   }
 };
 
-const getCounts = async () => {
+const getCounts = async (search) => {
   try {
+    if (search) {
+      return await svgModel.countDocuments({ isDeleted: false, $or: [{ title: { $regex: new RegExp(search, "i") } }, { category: { $regex: new RegExp(search, "i") } }] });
+    }
     const counts = await svgModel.countDocuments({ isDeleted: false });
 
     return counts;

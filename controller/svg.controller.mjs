@@ -38,7 +38,8 @@ const getSVG = async (req, res) => {
 
 const getCount = async (req, res) => {
   try {
-    const counts = await getCounts();
+    const { search } = req.query;
+    const counts = await getCounts(search);
 
     return res.send({ success: true, counts: counts });
   } catch (e) {
