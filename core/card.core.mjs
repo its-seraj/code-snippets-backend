@@ -59,8 +59,17 @@ const saveOrUpdateCard = async (cardBody) => {
   }
 };
 
-const getCards = async (userId) => {
+const getCards = async (userId, search) => {
   try {
+    if (search) {
+      return await cardModel
+        .find({
+          userId,
+          isDeleted: false,
+          $or: [{ title: { $regex: new RegExp(search, "i") } }, { description: { $regex: new RegExp(search, "i") } }, { labels: { $elemMatch: { $regex: new RegExp(search, "i") } } }],
+        })
+        .sort({ displayorder: 1 });
+    }
     const cards = await cardModel.find({ userId, isDeleted: false }).sort({ displayorder: 1 });
 
     return cards;

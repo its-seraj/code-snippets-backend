@@ -26,8 +26,8 @@ const newSVG = async (req, res) => {
 
 const getSVG = async (req, res) => {
   try {
-    const { offset } = req.query;
-    const svgsData = await getSVGs(offset ?? 0);
+    const { offset, search } = req.query;
+    const svgsData = await getSVGs(offset ?? 0, search);
 
     return res.send({ success: true, count: svgsData?.length, data: svgsData });
   } catch (e) {

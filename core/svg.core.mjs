@@ -25,8 +25,17 @@ const saveOrUpdateSVG = async (svgBody) => {
   }
 };
 
-const getSVGs = async (offset) => {
+const getSVGs = async (offset, search) => {
   try {
+    if (search) {
+      return await svgModel
+        .find({
+          isDeleted: false,
+          $or: [{ title: { $regex: new RegExp(search, "i") } }, { category: { $regex: new RegExp(search, "i") } }],
+        })
+        .skip(offset)
+        .limit(200);
+    }
     const cards = await svgModel.find({ isDeleted: false }).skip(offset).limit(200);
 
     return cards;

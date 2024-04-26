@@ -37,9 +37,9 @@ const newCard = async (req, res) => {
 
 const getCard = async (req, res) => {
   try {
-    const { userId } = req.query;
+    const { userId, search } = req.query;
 
-    const cardsData = await getCards(userId);
+    const cardsData = await getCards(userId, search);
 
     return res.send({ success: true, count: cardsData?.length, data: cardsData });
   } catch (e) {
