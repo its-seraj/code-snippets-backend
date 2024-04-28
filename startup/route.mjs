@@ -1,6 +1,7 @@
 import { cardRouter } from "../routes/card.router.mjs";
 import { userRouter } from "../routes/login.router.mjs";
 import { svgRouter } from "../routes/svg.router.mjs";
+import { lofiRouter } from "../routes/lofi.router.mjs";
 
 export const routes = (app) => {
   app.get("/", (req, res) => {
@@ -10,4 +11,5 @@ export const routes = (app) => {
   app.use("/card", cardRouter);
   app.use("/login", userRouter);
   app.use("/svg", svgRouter);
+  app.use("/lofi", lofiRouter);
 };
